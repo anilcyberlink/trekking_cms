@@ -1,279 +1,437 @@
-<footer class="relative">
-    <!-- Top Mountain Silhouette -->
-    <div class="w-full overflow-hidden bg-transparent">
-        <img src="{{asset('theme-assets/assets/footer/footer-mountains.svg')}}" alt="Summit8000"
-            class="w-full object-cover h-auto">
-    </div>
+ <footer class="relative bg-[#0c141d] text-[#98a2b3]">
 
-    <!-- Main Footer Section -->
-    <div class="bg-summit-teal pt-12 pb-20  ">
-        <div class="container mx-auto">
-            <!-- Header: Logo and Newsletter -->
-            <div class="flex flex-col lg:flex-row justify-between items-center mb-16 gap-8">
-                <!-- Logo -->
-                <div class="flex items-center gap-2">
-                    <div class="relative">
-                        <img src="{{asset('theme-assets/assets/logo-white.svg')}}" alt="Summit8000 Logo Icon ">
-                    </div>
-                </div>
-                <!-- Subscription Box -->
-                <div class="w-full max-w-3xl border border-white/30 rounded-xl p-4 flex flex-col sm:flex-row items-center gap-4 bg-white/5 backdrop-blur-sm">
-                    <div class="flex items-center gap-3 text-white">
-                        <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                            </path>
-                        </svg>
-                        <p class="text-sm">Get our latest articles and promotions straight to your inbox</p>
-                    </div>
-                    <!-- Input + Button -->
-                    <form action="{{ route('subscribe') }}"  method="post">
-                        <div class="flex w-full sm:w-auto">
-                            @csrf
-                            <input type="hidden" id="g_recaptcha_response3" name="g_recaptcha_response3"/>
-                            <input type="email" name="email" placeholder="Enter your email*" required class="w-full sm:w-64 rounded-l-xl bg-white/90 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400" />
+     <!-- ===== TOP BAR ===== -->
+     <div class="py-10 border-b border-[#3d434a]">
+         <div class="container mx-auto">
 
-                            <button type="submit" class="flex items-center gap-2 rounded-r-xl bg-brand-400 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 hover:shadow-lg hover:shadow-brand-400/30 focus:outline-none focus:ring-2 focus:ring-brand-400">
-                                Subscribe
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
+             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
 
-                </div>
-            </div>
+                 <!-- Logo -->
+                 <div class="flex justify-center lg:justify-start">
+                     <img src="assets/logo-white.png" alt="Logo" class="w-36 md:w-40">
+                 </div>
 
-            <!-- Custom Divider with Mountain Icon -->
-            <div class="relative flex items-center mb-16 overflow-hidden">
-                <div class="flex-grow border-t border-white/20"></div>
-                <div class="px-4">
-                    <svg width="50" height="25" viewBox="0 0 50 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M30.4365 13.9618L32.978 11.0227L40.6769 20.8489H35.7366L30.4365 13.9618ZM22.9429 17.0778L19.6892 12.8615L13.5772 20.8489H8.276L19.5872 6.63546L25.4095 14.0034L22.9429 17.0778ZM33.0682 4.2164L27.9841 10.6536L19.4732 -1.14441e-05L0 24.9063L15.55 24.9418L19.7889 19.4565L22.8859 23.6075L28.0115 17.2796L34.0154 24.9063H49.0526L33.0682 4.2164Z" fill="#BEDBFF" />
-                    </svg>
+                 <!-- Associations -->
+                 <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 text-center lg:text-left">
+                     <h3 class="text-white font-semibold">Associations</h3>
 
-                </div>
-                <div class="flex-grow border-t border-white/20"></div>
-            </div>
+                     <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                         <img src="assets/associated/nepal-goverment.avif" alt="Nepal Gov"
+                             class="w-8 h-8 object-contain">
+                         <img src="assets/associated/ntb.avif" alt="NTB" class="w-8 h-8 object-contain">
+                         <img src="assets/associated/keep.avif" alt="KEEP" class="w-8 h-8 object-contain">
+                         <img src="assets/associated/nma.avif" alt="NMA" class="w-8 h-8 object-contain">
+                         <img src="assets/associated/taan.avif" alt="TAAN" class="w-8 h-8 object-contain">
+                     </div>
+                 </div>
 
-            <!-- Navigation Links Grid -->
-            <div
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 justify-between text-white text-base font-medium">
-                <!-- Column 1 -->
-                <div>
-                    <h3 class="font-bold text-lg mb-6">Popular Trips</h3>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        @foreach($best_sellers as $row)
-                            <li>
-                                <a href="{{ route('trip.tripdetail',$row->uri) }}" class="hover:text-white transition-colors">{{ $row->trip_title }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <!-- Column 2 -->
-                <div>
-                    <h3 class="font-bold text-lg mb-6">Luxury Trips</h3>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        @foreach($luxury_tirps as $row)
-                            <li>
-                                <a href="{{ route('trip.tripdetail',$row->uri) }}" class="hover:text-white transition-colors">{{ $row->trip_title }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <!-- Column 3 -->
-                <div>
-                    <h3 class="font-bold text-lg mb-6">Company</h3>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        @foreach($footer as $row)
-                            <li>
-                                <a href="{{route('page.posttype_detail',$row->uri)}}" class="hover:text-white transition-colors">{{ $row->post_type }}</a>
-                            </li>
-                        @endforeach
-                        <li>
-                            <a href="{{ route('reviews') }}" class="hover:text-white transition-colors">Read Reviews</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Column 4 -->
-                <div>
-                    <h3 class="font-bold text-lg mb-6">Things to Know</h3>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        @foreach($ttk as $row)
-                            <li>
-                                <a href="{{ route('page.posttype_detail',$row->uri) }}" class="hover:text-white transition-colors">{{ $row->post_type }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <!-- Contact Info Column -->
-                <div class="space-y-6">
-                    <!-- Emergency SOS -->
-                    <div class="flex items-start gap-3">
-                        <div class="flex-shrink-0 w-6 h-6 text-white flex items-center justify-center overflow-hidden">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold mb-2 text-white">Emergency SOS (24/7):</h4>
-                            <p class="text-sm text-gray-300">Landline: {{ $setting->phone }}</p>
-                            <p class="text-sm text-gray-300">Mobile: {{ $setting->fax }}</p>
-                            <p class="text-sm text-gray-300">WhatsApp: {{ $setting->usa_phone }}</p>
-                        </div>
-                    </div>
+             </div>
 
-                    <!-- Email -->
-                    <div class="flex items-start gap-3">
-                        <div class="flex-shrink-0 w-6 h-6 text-white flex items-center justify-center overflow-hidden">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold mb-2 text-white">Email:</h4>
-                            <p class="text-sm text-gray-300">{{ $setting->email_primary }} <br> {{ $setting->email_secondary }}</p>
-                        </div>
-                    </div>
+             <div>
 
-                    <!-- Address -->
-                    <div class="flex items-start gap-3">
-                        <div class="flex-shrink-0 w-6 h-6 text-white flex items-center justify-center overflow-hidden">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold mb-2 text-white">Address:</h4>
-                            <p class="text-sm text-gray-300 leading-relaxed">
-                                {{ $setting->address }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+             </div>
 
-            </div>
-        </div>
-    </div>
+         </div>
+     </div>
 
-    <!-- Wavy Divider Transition -->
-    <div class="w-full bg-summit-teal">
-        <img src="{{asset('theme-assets/assets/footer/vector.svg')}}" alt="Summit8000" class="w-full object-cover">
-    </div>
 
-    <!-- White Background Associations Section -->
-    <div class="bg-white py-12 px-4">
-        <div class="container mx-auto flex flex-col lg:flex-row justify-between items-start gap-12">
-            <!-- Payment Icons -->
-            <div>
-                <h4 class="text-gray-500 font-bold mb-6 text-sm">We Accept</h4>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <img src="{{ $homebrief->image ? asset('uploads/original/'.$homebrief->image) : asset('theme-assets/assets/online-pay.webp')}}" alt="Sectigo" class="h-8">
-                </div>
-            </div>
+     <!-- ===== MAIN FOOTER ===== -->
+     <div class="container mx-auto">
 
-            <!-- Associations -->
-            <div>
-                <h4 class="text-gray-500 font-bold mb-6 text-sm ">We are associated with</h4>
-                <div class="flex flex-wrap gap-6 items-center">
-                    <img src="{{asset('theme-assets/assets/associated/ntb.webp')}}" alt="NTB" class="h-10">
-                    <img src="{{asset('theme-assets/assets/associated/taan.webp')}}" alt="TAAN" class="h-10">
-                    <img src="{{asset('theme-assets/assets/associated/himalayan-rescue-association.webp')}}" alt="HRA"
-                        class="h-10">
-                    <img src="{{asset('theme-assets/assets/associated/keep.webp')}}" alt="KEEP" class="h-10">
-                    <img src="{{asset('theme-assets/assets/associated/nepal-gov.webp')}}" alt="Nepal Gov" class="h-10">
-                    <img src="{{asset('theme-assets/assets/associated/nma.webp')}}" alt="NMA" class="h-10">
-                </div>
-            </div>
+         <div class="py-16">
+             <!-- info -->
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 pb-10">
 
-            <!-- Social Links -->
-            <div>
-                <h4 class="text-gray-500 font-bold mb-6 text-sm ">Connect with us</h4>
-                <div class="flex gap-4">
-                    @if($setting->youtube_link)
-                        <a href="{{ $setting->youtube_link }}" target="_blank">
-                            <img src="{{asset('theme-assets/assets/social/youtube.svg')}}"
-                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                        </a>
-                    @endif
-                    @if($setting->instagram_link)
-                        <a href="{{ $setting->instagram_link }}" target="_blank">
-                            <img src="{{asset('theme-assets/assets/social/instagram.svg')}}"
-                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                        </a>
-                    @endif
-                    @if($setting->twitter_link)
-                        <a href="{{ $setting->twitter_link }}" target="_blank">
-                            <img src="{{asset('theme-assets/assets/social/twitter.svg')}}"
-                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                        </a>
-                    @endif
-                    @if($setting->facebook_link)
-                        <a href="{{ $setting->facebook_link }}" target="_blank">
-                            <img src="{{asset('theme-assets/assets/social/facebook.svg')}}"
-                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                        </a>
-                    @endif
-                    @if($setting->linkedin_link)
-                        <a href="{{ $setting->linkedin_link }}" target="_blank">
-                            <img src="{{asset('theme-assets/assets/social/linkedIn.svg')}}"
-                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                        </a>
-                    @endif
-                    @if($setting->tiktok_link)
-                        <a href="{{ $setting->tiktok_link }}" target="_blank">
-                            <img src="{{asset('theme-assets/assets/social/tiktok.svg')}}"
-                                class="w-8 h-8 rounded-full  flex items-center justify-center   hover:opacity-70 transition-opacity">
-                        </a>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
+                 <!-- ABOUT -->
+                 <div>
+                     <h3 class="text-white font-bold text-lg lg:text-xl mb-6">
+                         About Us
+                     </h3>
 
-    <!-- Final Copyright Bar -->
-    <div class="bg-summit-teal py-6 px-4">
-        <div
-            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
-            <p class="text-white/60 text-sm">{{ $setting->copyright_text }}</p>
-            <p class="text-white/60 text-xs max-w-2xl">
-                {{ $setting->flight_brief }}
-            </p>
-        </div>
-    </div>
-<style>
-    .grecaptcha-badge {
-        visibility: hidden !important;
-    }
-</style>
-<script src="https://www.google.com/recaptcha/api.js?render={{env('SITE_KEY')}}"></script>
-<script>
-    grecaptcha.ready(function () {
-        function executeRecaptcha() {
-            grecaptcha.execute('<?php echo env("SITE_KEY"); ?>', {action: 'homepage'}).then(function (token) {
-                document.getElementById('g_recaptcha_response3').value = token;
-            });
-        }
+                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 ">
 
-        // Initial execution of reCAPTCHA
-        executeRecaptcha();
+                         <li><a href="about-us.php" class="hover:text-white hover:underline">About Us</a></li>
+                         <li><a href="team.php" class="hover:text-white hover:underline">Our Team</a></li>
+                         <li><a href="legal-documents.php" class="hover:text-white hover:underline">Legal Documents</a>
+                         </li>
+                         <li><a href="reviews.php" class="hover:text-white hover:underline">Read Reviews</a></li>
+                         <li><a href="blog.php" class="hover:text-white hover:underline">Our Blog</a></li>
+                         <li><a href="contact-us.php" class="hover:text-white hover:underline">Contact Us</a></li>
+                         <li><a href="terms-and-conditions.php" class="hover:text-white hover:underline">Terms &
+                                 Conditions</a></li>
+                         <li><a href="privacy-policy.php" class="hover:text-white hover:underline">Privacy Policy</a>
+                         </li>
+                         <li><a href="travel-insurance.php" class="hover:text-white hover:underline">Travel
+                                 Insurance</a>
+                         </li>
+                         <li><a href="nepal-visa-information.php" class="hover:text-white hover:underline">Nepal Visa
+                                 Information</a></li>
+                         <li><a href="best-trekking-season.php" class="hover:text-white hover:underline">Best Trekking
+                                 Season</a></li>
 
-        // Refresh the reCAPTCHA token every 100 seconds (less than 2 minutes)
-        setInterval(executeRecaptcha, 900000);
-    });
+                     </ul>
+                 </div>
 
-</script>
-</footer>
 
-</body>
-<!-- Include Swiper JS -->
- <script src="{{ asset('theme-assets/js/flowbite.min.js') }}"></script>
- <script src="{{ asset('theme-assets/js/swiper-bundle.min.js') }}"></script>
- <script src="{{ asset('theme-assets/js/fancybox.umd.js') }}"></script>
- <script src="{{ asset('theme-assets/js/app.js') }}"></script>
- <script src="https://kit.fontawesome.com/564ea3e674.js" crossorigin="anonymous"></script>
 
-<script>
-    Fancybox.bind("[data-fancybox]", {
-        // Your custom options
-    });
 
-</script>
+                 <!-- CONTACT -->
+                 <div>
 
-</html>
+                     <h3 class="text-white font-bold text-lg lg:text-xl mb-6">
+                         Contact Us
+                     </h3>
+
+                     <div class="space-y-5 ">
+
+                         <div class="flex items-start gap-3">
+                             <i class="fa fa-phone text-white mt-1"></i>
+                             <p>+977 1 4488541, +977 9880082828</p>
+                         </div>
+
+                         <div class="flex items-start gap-3">
+                             <i class="fa fa-envelope text-white mt-1"></i>
+                             <p>info@treklaya.com</p>
+                         </div>
+
+                         <div class="flex items-start gap-3">
+                             <i class="fa-solid fa-location-dot text-white mt-1"></i>
+                             <p>
+                                 House 23, Street A Kapan<br>
+                                 Budhanilkantha-11, Kathmandu 44600
+                             </p>
+                         </div>
+
+                     </div>
+
+                 </div>
+                 <!-- NEWSLETTER -->
+                 <div>
+
+                     <div class="mb-6">
+                         <h3 class="text-white font-bold text-lg lg:text-xl">
+                             Our newsletter
+                         </h3>
+
+                         <p class=" pt-1">
+                             Sign up to the our newsletter for our latest news & announcements.
+
+
+                         </p>
+                     </div>
+
+                     <form class="space-y-4">
+
+                         <input type="text" placeholder="Full Name*"
+                             class="w-full px-4 py-3 rounded-md bg-transparent border border-[#3d434a] text-white placeholder-[#98a2b3] focus:outline-none focus:border-brand-500">
+
+                         <input type="email" placeholder="E-mail*"
+                             class="w-full px-4 py-3 rounded-md bg-transparent border border-[#3d434a] text-white placeholder-[#98a2b3] focus:outline-none focus:border-brand-500">
+
+                         <button
+                             class="bg-brand-500 hover:bg-brand-400 text-white px-6 py-3 rounded-full  font-medium transition w-full sm:w-auto">
+                             Subscribe
+                         </button>
+
+                     </form>
+
+                 </div>
+
+
+             </div>
+             <!-- Representatives Grid -->
+             <div class="border-t pt-10 border-[#3d434a]">
+                 <!-- Heading -->
+                 <div class=" mb-8">
+                     <h2 class="text-white font-bold text-lg lg:text-xl mb-1">Speak with our Worldwide Representatives
+                     </h2>
+                     <p class="mt-2">Contact a representative from your country for personalized assistance.</p>
+                 </div>
+
+
+                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+
+                     <!-- Sujan -->
+                     <a href="https://wa.me/9779851233710"
+                         class="block bg-[#1a1f29] p-4 rounded-xl flex items-start gap-4 hover:bg-[#2a3345] hover:-translate-y-1 transition duration-300 cursor-pointer">
+
+                         <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="Sujan"
+                             class="w-12 h-12 rounded-full object-cover">
+
+                         <div class="flex-1">
+                             <h4 class="font-semibold text-white">Sujan</h4>
+
+                             <p class="text-gray-400 text-sm flex items-center gap-2 mt-1">
+                                 <img src="https://flagcdn.com/w20/np.png" class="w-5 h-4 rounded-sm">
+                                 Nepal
+                             </p>
+
+                             <p class="flex items-center gap-2 text-green-500 mt-2 text-sm">
+                                 <i class="fa-brands fa-whatsapp"></i> +977 9851233710
+                             </p>
+                         </div>
+                     </a>
+
+                     <!-- Prem -->
+                     <a href="https://wa.me/9779851102225"
+                         class="block bg-[#1a1f29] p-4 rounded-xl flex items-start gap-4 hover:bg-[#2a3345] hover:-translate-y-1 transition duration-300 cursor-pointer">
+
+                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Prem"
+                             class="w-12 h-12 rounded-full object-cover">
+
+                         <div class="flex-1">
+                             <h4 class="font-semibold text-white">Prem</h4>
+
+                             <p class="text-gray-400 text-sm flex items-center gap-2 mt-1">
+                                 <img src="https://flagcdn.com/w20/np.png" class="w-5 h-4 rounded-sm">
+                                 Nepal
+                             </p>
+
+                             <p class="flex items-center gap-2 text-green-500 mt-2 text-sm">
+                                 <i class="fa-brands fa-whatsapp"></i> +977 9851102225
+                             </p>
+                         </div>
+                     </a>
+
+                     <!-- Kathy -->
+                     <a href="tel:+18773060650"
+                         class="block bg-[#1a1f29] p-4 rounded-xl flex items-start gap-4 hover:bg-[#2a3345] hover:-translate-y-1 transition duration-300 cursor-pointer">
+
+                         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Kathy"
+                             class="w-12 h-12 rounded-full object-cover">
+
+                         <div class="flex-1">
+                             <h4 class="font-semibold text-white">Kathy</h4>
+
+                             <p class="text-gray-400 text-sm flex items-center gap-2 mt-1">
+                                 <img src="https://flagcdn.com/w20/us.png" class="w-5 h-4 rounded-sm">
+                                 USA
+                             </p>
+
+                             <p class="flex items-center gap-2 text-gray-300 mt-2 text-sm">
+                                 <i class="fa fa-phone"></i> +1 877-306-0650
+                             </p>
+                         </div>
+                     </a>
+
+                     <!-- Melanie -->
+                     <a href="https://wa.me/41765662003"
+                         class="block bg-[#1a1f29] p-4 rounded-xl flex items-start gap-4 hover:bg-[#2a3345] hover:-translate-y-1 transition duration-300 cursor-pointer">
+
+                         <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Melanie"
+                             class="w-12 h-12 rounded-full object-cover">
+
+                         <div class="flex-1">
+                             <h4 class="font-semibold text-white">Melanie</h4>
+
+                             <p class="text-gray-400 text-sm flex items-center gap-2 mt-1">
+                                 <img src="https://flagcdn.com/w20/ch.png" class="w-5 h-4 rounded-sm">
+                                 Switzerland
+                             </p>
+
+                             <p class="flex items-center gap-2 text-green-500 mt-2 text-sm">
+                                 <i class="fa-brands fa-whatsapp"></i> +41 76 566 2003
+                             </p>
+                         </div>
+                     </a>
+
+                     <!-- Sihyoung -->
+                     <a href="https://wa.me/821093401692"
+                         class="block bg-[#1a1f29] p-4 rounded-xl flex items-start gap-4 hover:bg-[#2a3345] hover:-translate-y-1 transition duration-300 cursor-pointer">
+
+                         <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Sihyoung"
+                             class="w-12 h-12 rounded-full object-cover">
+
+                         <div class="flex-1">
+                             <h4 class="font-semibold text-white">Sihyoung</h4>
+
+                             <p class="text-gray-400 text-sm flex items-center gap-2 mt-1">
+                                 <img src="https://flagcdn.com/w20/kr.png" class="w-5 h-4 rounded-sm">
+                                 South Korea
+                             </p>
+
+                             <p class="flex items-center gap-2 text-green-500 mt-2 text-sm">
+                                 <i class="fa-brands fa-whatsapp"></i> +82 10 9340 1692
+                             </p>
+                         </div>
+                     </a>
+
+                     <!-- Abex -->
+                     <a href="https://wa.me/6281270160460"
+                         class="block bg-[#1a1f29] p-4 rounded-xl flex items-start gap-4 hover:bg-[#2a3345] hover:-translate-y-1 transition duration-300 cursor-pointer">
+
+                         <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Abex"
+                             class="w-12 h-12 rounded-full object-cover">
+
+                         <div class="flex-1">
+                             <h4 class="font-semibold text-white">Abex</h4>
+
+                             <p class="text-gray-400 text-sm flex items-center gap-2 mt-1">
+                                 <img src="https://flagcdn.com/w20/id.png" class="w-5 h-4 rounded-sm">
+                                 Indonesia
+                             </p>
+
+                             <p class="flex items-center gap-2 text-green-500 mt-2 text-sm">
+                                 <i class="fa-brands fa-whatsapp"></i> +62 812 7016 0460
+                             </p>
+                         </div>
+                     </a>
+
+                 </div>
+             </div>
+
+         </div>
+     </div>
+
+
+     <!-- ===== BOTTOM ===== -->
+     <!-- <div class="border-t border-white/10"> -->
+     <div>
+
+         <div class="container mx-auto  pb-10">
+
+             <div class="flex flex-col   gap-10 items-center justify-between">
+
+
+
+                 <!-- Payments -->
+                 <div class="flex flex-col items-center gap-2">
+                     <!-- <p class="text-xs font-semibold text-white">We Accept</p> -->
+
+                     <div class="flex flex-wrap justify-center gap-2">
+
+                         <img src="assets/payments/visa.avif" alt="Visa" class="h-10">
+                         <img src="assets/payments/master-card.avif" alt="master Card" class="h-10">
+                         <img src="assets/payments/american-express.avif" alt="American Express" class="h-10">
+                         <img src="assets/payments/discover.avif" alt="Discover" class="h-10">
+                         <img src="assets/payments/jcb.avif" alt="Jcb" class="h-10">
+                         <img src="assets/payments/dinners-club.avif" alt="Dinners Club" class="h-10">
+                         <img src="assets/payments/union-pay.avif" alt="Union Pay" class="h-10">
+
+                     </div>
+                 </div>
+                 <!-- Social -->
+                 <div class="flex flex-col items-center gap-2">
+                     <!-- <p class="text-xs font-semibold text-white">Follow Us</p> -->
+
+                     <div class="flex gap-3 justify-center lg:justify-start">
+                         <a href="#"><img src="assets/social/facebook.svg" alt="Facebook"
+                                 class="w-8 hover:opacity-70"></a>
+
+                         <a href="#"><img src="assets/social/instagram.svg" alt="Instagram"
+                                 class="w-8 hover:opacity-70"></a>
+                         <a href="#"><img src="assets/social/tiktok.svg" alt="TikTok"
+                                 class="w-8 hover:opacity-70"></a>
+                         <a href="#"><img src="assets/social/linkedIn.svg" alt="LinkedIn"
+                                 class="w-8 hover:opacity-70"></a>
+                         <a href="#"><img src="assets/social/youtube.svg" alt="Youtube"
+                                 class="w-8 hover:opacity-70"></a>
+                     </div>
+                 </div>
+
+
+                 <!-- Copyright -->
+                 <div class="text-center lg:text-right text-xs font-semibold">
+                     © 2026 Treklaya Pvt. Ltd. All rights reserved.
+                 </div>
+
+             </div>
+
+         </div>
+
+     </div>
+
+ </footer>
+ <!-- OnLoadModal modal -->
+ <script>
+     document.addEventListener("DOMContentLoaded", function() {
+         const modal = document.getElementById("OnLoadModal");
+         const closeBtn = modal.querySelector("[data-modal-hide]");
+
+         // Show modal after 10 seconds
+         setTimeout(() => {
+             modal.classList.remove("hidden");
+             modal.classList.add("flex"); // Add flex to center it
+         }, 1); // 10000ms = 10 seconds
+
+         // Close modal when clicking close button
+         closeBtn.addEventListener("click", () => {
+             modal.classList.add("hidden");
+             modal.classList.remove("flex");
+         });
+
+         // Optional: Close modal when clicking outside content
+         modal.addEventListener("click", (e) => {
+             if (e.target === modal) {
+                 modal.classList.add("hidden");
+                 modal.classList.remove("flex");
+             }
+         });
+     });
+ </script>
+ <!-- OnLoad Modal -->
+ <div id="OnLoadModal" tabindex="-1"
+     class="hidden overflow-y-auto overflow-x-hidden fixed bg-black/70 backdrop-blur-sm top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+     <div class="relative p-4 w-full max-w-2xl max-h-full">
+         <!-- Modal content -->
+         <div class="relative bg-white border border-gray-200 rounded-2xl">
+             <!-- Close Button -->
+             <button type="button" data-modal-hide="OnLoadModal"
+                 class="absolute -top-12 right-0 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full w-10 h-10 flex items-center justify-center transition">
+                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                 </svg>
+             </button>
+
+             <!--  Offers -->
+             <div class="p-1">
+                 <a class="item group transition-all duration-500 hover:-translate-y-2 " href="">
+                     <figure class="relative overflow-hidden rounded-2xl h-[180px] md:h-[250px]   image-anime">
+                         <img data-src="{{ asset('theme-assets/assets/trip/1.webp') }}"
+                             src="{{ asset('theme-assets/assets/default.jpg') }}" loading="lazy"
+                             alt="Everest Base Camp Trek"
+                             class="lazy-img object-cover w-full h-full absolute inset-0 transition-transform duration-700 group-hover:scale-110" />
+
+                     </figure>
+                 </a>
+             </div>
+
+             <!-- Modal body / Form -->
+             <form action="#">
+                 <div class="p-6 space-y-6">
+                     <div>
+                         <h2 class="text-2xl font-bold text-gray-900 mb-2">Our newsletter</h2>
+                         <p class="text-gray-700">Sign up to the our newsletter for our latest news & announcements.
+                         </p>
+                     </div>
+                     <div class="mb-4  grid grid-cols-1 md:grid-cols-2 gap-6">
+                         <div>
+
+                             <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name
+                                 *</label>
+                             <input type="text" id="name" name="name" required
+                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                         </div>
+                         <div>
+                             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email
+                                 *</label>
+                             <input type="email" id="email" name="email" required
+                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                         </div>
+                     </div>
+
+                     <button
+                         class="bg-brand-500 hover:bg-brand-400 text-white px-6 py-3 rounded-full  font-medium transition w-full sm:w-auto">
+                         Subscribe
+                     </button>
+                 </div>
+
+             </form>
+         </div>
+     </div>
+ </div>
+
+ <!-- End OnLoadModal modal -->
+ </body>
+
+ </html>

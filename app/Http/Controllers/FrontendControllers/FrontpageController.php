@@ -95,13 +95,9 @@ class FrontpageController extends Controller
                 return $item;
             });
         $best_seller = TripModel::where(['trip_of_the_month' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get();
-        $about = PostTypeModel::where('id' , 22)->first();
-        $luxury_tirps = TripModel::where(['video_status' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get();
-        $reviews = TripReview::where('status', 1)->latest()->take(3)->get();
-        $blog = PostTypeModel::where('id' , 33)->first();
-        $blogs = PostModel::where('post_type' , $blog->id)->latest()->take(3)->get();
-        $homebrief = HomeBriefModel::where('id',1)->first();
-        return view('themes.default.frontpage', compact('banners','allActivities','best_seller','about','luxury_tirps','blog','blogs','reviews','homebrief'));
+
+
+        return view('themes.default.frontpage', compact('banners','allActivities','best_seller'));
     }
 
 
