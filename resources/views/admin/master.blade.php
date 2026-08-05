@@ -61,7 +61,7 @@
                     <img src="{{ asset('uploads/original/' . $setting->logo) }}" alt="{{ config('app.name') }}"
                         width="100" />
                     @else --}}
-                    <img src="{{ asset('theme-assets/logo.svg') }}" alt="{{ config('app.name') }}" width="100" />
+                    <img src="{{ asset('theme-assets/assets/treklogo.jpg') }}" alt="{{ config('app.name') }}" width="100" />
                     {{-- @endif --}}
                 </a>
                 <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
@@ -118,12 +118,12 @@
                             <span class="sidebar-title"> Manage Banners </span>
                         </a>
                     </li>
-                    <li class="{{ Request::segment(2) == 'home' ? 'active' : '' }}">
+                    {{-- <li class="{{ Request::segment(2) == 'home' ? 'active' : '' }}">
                         <a href="{{ url('admin/home/brief') }}">
                             <span class="fa fa-archive "></span>
                             <span class="sidebar-title"> Homepage Info </span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="">
                         @if (
                                 Request::segment(2) == 'posttype' ||
