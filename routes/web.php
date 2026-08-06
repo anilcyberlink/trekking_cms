@@ -279,10 +279,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('trip_of_the_month/{id?}', 'AdminControllers\Travels\TripController@trip_of_the_month')->name('trip_of_the_month');
 
-    View::composer(['*'], function ($view) {
-        $posttype = App\Models\Posts\PostTypeModel::orderBy('ordering', 'asc')->get();
-        $view->with('posttype', $posttype);
-    });
 
     Route::delete('admin/certificates/{id}/{info_id}','AdminControllers\Teams\TeamController@certificatesdestroy')->name('certificates.destroy');
 
