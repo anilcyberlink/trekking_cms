@@ -23,6 +23,7 @@ Previous Database Backup : --/--/---- (MM/DD/YYYY)
 1. Intervention Image is locked at version 2.7.2, compatible with Laravel 6 to 10.
 2. Tinymce Installed
 3. Vendor/web-token/jwt-framework/Library/Checker/NotBeforeChecker.php "private readonly int $allowedTimeDrift = 5 "(do it for hbl payment to work after vendor install or update)
-4. This cms contains the seo friendly (seo morph, webp image format)
+4. This cms is seo friendly (seo morph, webp image format)
+5. Databases are inside the database/schemas.
 
 
