@@ -1,0 +1,38 @@
+name: Deploy Laravel
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/ukeshcom/public_html/demo3
+
+            echo "Current directory:"
+            pwd
+
+            git status
+
+            OLD_COMMIT=$(git rev-parse HEAD)
+
+            git pull origin main
+
+            NEW_COMMIT=$(git rev-parse HEAD)
+
+            if ! git diff --quiet $OLD_COMMIT $NEW_COMMIT -- composer.lock; then
+              echo "composer.lock changed. Running composer install..."
+              composer install --no-dev --optimize-autoloader --no-interaction
+            else
+              echo "composer.lock unchanged. Skipping composer install."
+            fi
+
+            php artisan optimize:clear
+            php artisan optimize
