@@ -44,7 +44,7 @@ class LoginController extends Controller
     {
         $g_recaptcha_response = $request->input('g_recaptcha_response');
         $result = $this->getCaptcha($g_recaptcha_response);
-        // dd($request->all(),$result,$g_recaptcha_response);
+
         // // Check if success is true and Score is greater than 0.5 [ $result->score > 0.5 ]
         if ($result->success == true) {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'pin' => $request->pin])) {
