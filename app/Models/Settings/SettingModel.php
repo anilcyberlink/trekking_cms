@@ -23,5 +23,5 @@ class SettingModel extends Model
     {
         return config('app.frontend_url');
     }
-    
+
 }
