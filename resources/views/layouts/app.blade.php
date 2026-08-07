@@ -192,10 +192,10 @@
     <script src="{{ asset(env('PUBLIC_PATH')) }}assets/js/demo/demo.js"></script>
     <script src="{{ asset(env('PUBLIC_PATH')) }}assets/js/main.js"></script>
 
-    <script src="https://www.google.com/recaptcha/api.js?render={{ env('SITE_KEY') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
     <script>
         grecaptcha.ready(function() {
-            grecaptcha.execute('<?php echo env('SITE_KEY'); ?>', {
+            grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', {
                 action: 'homepage'
             }).then(function(token) {
                 document.getElementById('g_recaptcha_response').value = token;
