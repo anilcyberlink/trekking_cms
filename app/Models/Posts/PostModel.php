@@ -5,7 +5,8 @@ namespace App\Models\Posts;
 use App\Traits\HasSitemapUrl;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SeoMeta;
-use App\Models\PageSlug;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use App\Models\MultiImage\MultiImageModel;
 
 class PostModel extends Model
 {
@@ -37,15 +38,13 @@ class PostModel extends Model
         return $this->hasMany('App\Models\Posts\PostImageModel', 'post_id');
     }
 
-    public function slugs()
+
+    public function multiImages(): MorphMany
     {
-        return $this->morphMany(PageSlug::class, 'sluggable');
-    }
-    protected static function booted()
-    {
-        static::deleting(function ($model) {
-            $model->slugs()->delete();
-        });
+        return $this->morphMany(
+            MultiImageModel::class,
+            'multiImageable'
+        );
     }
 
 }

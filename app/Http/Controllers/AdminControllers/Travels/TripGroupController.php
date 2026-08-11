@@ -7,16 +7,9 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Travels\TripGroupModel;
 use Image;
-use App\Services\Slug\SlugService;
 
 class TripGroupController extends Controller
 {
-    protected $slugService;
-
-    public function __construct(SlugService $slugService)
-    {
-        $this->slugService = $slugService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -75,8 +68,6 @@ class TripGroupController extends Controller
         $data['uri'] = Str::slug($request->uri);
         $data['banner'] = $banner_name;
         $result = TripGroupModel::create($data);
-        // SLug Table
-        $this->slugService->store($result, $request->uri);
 
         return redirect()->back()->with('success', 'Successfully added.');
 
@@ -155,8 +146,6 @@ class TripGroupController extends Controller
         $data->meta_keyword = $request->meta_keyword;
         $data->meta_description = $request->meta_description;
         $data->save();
-        // Slug
-        $this->slugService->update($data, $request->uri);
 
         return redirect()->back()->with('success', 'Update Sucessfully.');
 

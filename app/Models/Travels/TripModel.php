@@ -5,7 +5,6 @@ namespace App\Models\Travels;
 use App\Traits\HasSitemapUrl;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SeoMeta;
-use App\Models\PageSlug;
 use App\Models\Posts\PostModel;
 use App\Models\Travels\AddonModel;
 
@@ -122,16 +121,6 @@ class TripModel extends Model
     public function seo()
     {
         return $this->morphOne(SeoMeta::class, 'seoable');
-    }
-    public function slugs()
-    {
-        return $this->morphMany(PageSlug::class, 'sluggable');
-    }
-    protected static function booted()
-    {
-        static::deleting(function ($model) {
-            $model->slugs()->delete();
-        });
     }
     public function relatedblogs()
     {

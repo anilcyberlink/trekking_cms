@@ -8,17 +8,10 @@ use App\Models\Travels\RegionModel;
 use App\Http\Controllers\Controller;
 use App\Models\Travels\ActivityModel;
 use Intervention\Image\Facades\Image;
-use App\Services\Slug\SlugService;
 
 
 class RegionController extends Controller
 {
-    protected $slugService;
-
-    public function __construct(SlugService $slugService)
-    {
-        $this->slugService = $slugService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -94,8 +87,6 @@ class RegionController extends Controller
         $result = RegionModel::create($data);
         $last_id = $result->id;
 
-        // SLug Table
-        $this->slugService->store($result, $request->uri);
 
         return redirect()->back()->with('success', 'Successfully added.');
 
@@ -201,8 +192,6 @@ class RegionController extends Controller
         $data->video = $request->video;
 
         $data->save();
-        // Slug
-        $this->slugService->update($data, $request->uri);
 
         return redirect()->back()->with('success', 'Update Sucessfully.');
 

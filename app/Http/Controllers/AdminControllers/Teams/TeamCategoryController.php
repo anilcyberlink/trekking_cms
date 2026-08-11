@@ -8,16 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Team\TeamCategory;
 use App\Models\Team\TeamModel;
 use Image;
-use App\Services\Slug\SlugService;
 
 class TeamCategoryController extends Controller
 {
-    protected $slugService;
-
-    public function __construct(SlugService $slugService)
-    {
-        $this->slugService = $slugService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -76,9 +69,6 @@ class TeamCategoryController extends Controller
         $data['uri'] = Str::slug($request->uri);
         $data['picture'] = $file_name;
         $result = TeamCategory::create($data);
-
-        // SLug Table
-        $this->slugService->store($result, $request->uri);
 
         if ($result) {
             return redirect()->back()->with('message', 'Successfully added.');
@@ -168,8 +158,6 @@ class TeamCategoryController extends Controller
         $data->content = $request->content;
         $data->status = $request->status;
         $data->save();
-        // Slug
-        $this->slugService->update($data, $request->uri);
 
         return redirect()->back()->with('message', 'Update Successful.');
     }

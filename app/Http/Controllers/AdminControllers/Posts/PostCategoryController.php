@@ -8,16 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Posts\PostCategoryModel;
 use App\Models\Posts\PostTypeModel;
 use Image;
-use App\Services\Slug\SlugService;
 
 class PostCategoryController extends Controller
 {
-    protected $slugService;
-
-    public function __construct(SlugService $slugService)
-    {
-        $this->slugService = $slugService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -77,9 +70,6 @@ class PostCategoryController extends Controller
         $data['uri'] = Str::slug($request->uri);
         $data['thumbnail'] = $file_name;
         $result = PostCategoryModel::create($data);
-
-        // SLug Table
-        $this->slugService->store($result, $request->uri);
 
         if($result){
             return redirect()->back()->with('message','Successfully added.');
@@ -163,9 +153,7 @@ class PostCategoryController extends Controller
         $data->category_caption = $request->category_caption;
         $data->category_content = $request->category_content;
         $data->save();
-        
-        // Slug
-        $this->slugService->update($data, $request->uri);
+
 
         return redirect()->back()->with('message','Update Successful.');
     }
