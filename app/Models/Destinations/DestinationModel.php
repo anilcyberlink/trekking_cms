@@ -5,11 +5,10 @@ namespace App\Models\Destinations;
 use App\Traits\HasSitemapUrl;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SeoMeta;
-use App\Models\PageSlug;
 class DestinationModel extends Model
 {
     use HasSitemapUrl;
-    
+
     protected $table = 'cl_trip_destinations';
     protected $fillable = ['title', 'uri', 'content', 'thumbnail', 'ordering', 'status','banner','video','brief'];
 
@@ -23,10 +22,6 @@ class DestinationModel extends Model
     public function seo()
     {
         return $this->morphOne(SeoMeta::class, 'seoable');
-    }
-    public function slugs()
-    {
-        return $this->morphMany(PageSlug::class, 'sluggable');
     }
     protected static function booted()
     {

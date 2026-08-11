@@ -9,16 +9,9 @@ use App\Models\Team\TeamCategory;
 use App\Models\Team\TeamModel;
 use App\Models\Team\Certificates;
 use Intervention\Image\Facades\Image;
-use App\Services\Slug\SlugService;
 
 class TeamController extends Controller
 {
-    protected $slugService;
-
-    public function __construct(SlugService $slugService)
-    {
-        $this->slugService = $slugService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -135,8 +128,6 @@ class TeamController extends Controller
             $result = TeamModel::create($data);
             $last_id = $result->id;
 
-            // SLug Table
-            $this->slugService->store($result, $request->uri);
 
             if ($result && $request->has('seo')) {
 
@@ -393,8 +384,6 @@ class TeamController extends Controller
             }
 
             $data->save();
-            // Slug
-            $this->slugService->update($data, $request->uri);
 
             // SEO
             if ($request->has('seo')) {

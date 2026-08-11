@@ -5,12 +5,11 @@ namespace App\Models\Travels;
 use App\Traits\HasSitemapUrl;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SeoMeta;
-use App\Models\PageSlug;
 
 class RegionModel extends Model
 {
     use HasSitemapUrl;
-    
+
     protected $table = 'cl_trip_regions';
     protected $fillable = ['title', 'sub_title', 'uri', 'thumbnail', 'banner', 'excerpt', 'content', 'video', 'meta_keyword', 'meta_description', 'ordering', 'status'];
 
@@ -21,16 +20,6 @@ class RegionModel extends Model
     public function seo()
     {
         return $this->morphOne(SeoMeta::class, 'seoable');
-    }
-    public function slugs()
-    {
-        return $this->morphMany(PageSlug::class, 'sluggable');
-    }
-    protected static function booted()
-    {
-        static::deleting(function ($model) {
-            $model->slugs()->delete();
-        });
     }
 
 }

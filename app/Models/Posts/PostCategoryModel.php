@@ -4,7 +4,6 @@ namespace App\Models\Posts;
 
 use App\Traits\HasSitemapUrl;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\PageSlug;
 
 class PostCategoryModel extends Model
 {
@@ -18,10 +17,6 @@ class PostCategoryModel extends Model
     public function posts()
     {
         return $this->hasMany(PostModel::class, 'post_category', 'id');
-    }
-    public function slugs()
-    {
-        return $this->morphMany(PageSlug::class, 'sluggable');
     }
     protected static function booted()
     {

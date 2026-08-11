@@ -5,12 +5,11 @@ namespace App\Models\Travels;
 use App\Traits\HasSitemapUrl;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SeoMeta;
-use App\Models\PageSlug;
 
 class ActivityModel extends Model
 {
     use HasSitemapUrl;
-    
+
     protected $table = 'cl_trip_activities';
     protected $fillable = ['activity_parent','title','sub_title','template','uri','thumbnail','banner','excerpt','content','external_link','meta_keyword','meta_description','ordering','status','isdefault','category_video','thumbnail_alt','banner_alt'];
 
@@ -27,16 +26,6 @@ class ActivityModel extends Model
     public function seo()
     {
         return $this->morphOne(SeoMeta::class, 'seoable');
-    }
-    public function slugs()
-    {
-        return $this->morphMany(PageSlug::class, 'sluggable');
-    }
-    protected static function booted()
-    {
-        static::deleting(function ($model) {
-            $model->slugs()->delete();
-        });
     }
 }
 

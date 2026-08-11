@@ -7,16 +7,9 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Posts\AssociatedPostModel;
 use Image;
-use App\Services\Slug\SlugService;
 
 class AssociatedPostController extends Controller
 {
-    protected $slugService;
-
-    public function __construct(SlugService $slugService)
-    {
-        $this->slugService = $slugService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -78,9 +71,6 @@ class AssociatedPostController extends Controller
 
         $data['page_key'] = time() . rand(500, 999);
         $result = AssociatedPostModel::create($data);
-
-        // SLug Table
-        $this->slugService->store($result, $request->uri);
 
         if ($result) {
             return redirect()->back()->with('success', 'Successfully added.');
@@ -149,8 +139,6 @@ class AssociatedPostController extends Controller
         $isChecked = $request->has('show_in_home');
         $data->show_in_home = ($isChecked) ? '1' : '0';
         $data->save();
-        // Slug
-        $this->slugService->update($data, $request->uri);
 
         return redirect()->back()->with('success', 'Update Sucessfully.');
 

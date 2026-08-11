@@ -9,17 +9,10 @@ use App\Models\Posts\PostTypeModel;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\Models\Posts\PostCategoryModel;
-use App\Services\Slug\SlugService;
 use App\Models\Travels\ActivityModel;
 
 class PostController extends Controller
 {
-    protected $slugService;
-
-    public function __construct(SlugService $slugService)
-    {
-        $this->slugService = $slugService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -213,9 +206,6 @@ class PostController extends Controller
         $data['reading_time'] = $request->reading_time;
         $result = PostModel::create($data);
         $last_id = $result->id;
-
-        // SLug Table
-        $this->slugService->store($result, $request->uri);
 
         // Save SEO Data
         if ($result && $request->has('seo')) {
@@ -449,9 +439,6 @@ class PostController extends Controller
             explode('/', trim($request->uri, '/'))
         ));
         $data->save();
-
-        // Slug
-        $this->slugService->update($data, $request->uri);
 
         if ($request->has('seo')) {
             $seoData = $request->seo ?? [];
